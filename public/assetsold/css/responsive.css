@@ -1,0 +1,456 @@
+@media(min-width:1024px) {
+
+  .mobile_left_menu,
+  .menu_toggle_mobile {
+    display: none;
+  }
+}
+
+@media(max-width:1399px) {
+
+  .right_header_wallet .right_header_wallet_lft p,
+  .right_header_wallet .right_header_wallet_rht p,
+  .right_header_profile p,
+  .right_header_switch label {
+    font-size: 14px;
+  }
+
+  .right_header_topup {
+    margin-right: 10px;
+  }
+
+  .right_header_profile .dropdown .dropdown-toggle img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .right_header_switch_lft {
+    width: 85px;
+  }
+}
+
+@media(max-width:1024px) {
+
+  .left_menu,
+  .menu_toggle {
+    display: none;
+  }
+
+  .right_section {
+    width: 100%;
+  }
+
+  .hideone {
+    width: 100% !important;
+  }
+
+  .mobile_left_menu {
+    display: block;
+  }
+
+  .user_right_bottom_ttl {
+    flex-wrap: wrap;
+  }
+
+  .user_right_bottom_ttl .right_bottom_ttl_lft {
+    text-align: left;
+  }
+
+  .user_right_bottom_ttl .right_bottom_ttl_rht,
+  .user_right_bottom_ttl .right_bottom_ttl_lft {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .user_right_bottom_ttl .right_bottom_ttl_lft {
+    margin-left: 30px;
+  }
+}
+
+@media(max-width:767px) {
+  .right_header_wallet {
+    display: none;
+  }
+
+  .right_header_lft {
+    width: 5%;
+  }
+
+  .Users_Main_list,
+  .user_right_bottom_ttl .right_bottom_ttl_lft {
+    margin-left: 0px;
+  }
+
+  .right_bottom_ttl.analaytics_bottom_ttl,
+  .analytics_rht_ttl {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .analytics_rht_ttl {
+    margin-top: 16px;
+  }
+
+  .right_bottom_ttl_lft.analytics_rht_ttl,
+  .user_select_drpdwn,
+  .right_bottom_ttl_lft .user_select_drpdwn select {
+    width: 100%;
+  }
+
+  .analytics__mains {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .analytics_dropdown{
+    margin-top: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .analytics_dropdown select{
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+}
+
+@media(max-width:576px) {
+  .right_header_profil_ttl {
+    width: 100px;
+  }
+
+  .right_header_profile p {
+    display: none;
+  }
+
+  .right_header_profile {
+    display: initial;
+    text-align: right;
+  }
+
+  .right_header_profil_ttl {
+    width: auto;
+  }
+
+  .right_header_lft {
+    width: 8%;
+  }
+
+  .right_bottom_ttl,
+  .manage_user_main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right_bottom_ttl.offer_detail_ttl {
+    flex-direction: row;
+  }
+
+  .rignt_section_bottom p {
+    font-size: 16px;
+  }
+
+  .rignt_section_bottom h4 {
+    font-size: 20px;
+  }
+
+  .manage_user_main .manage_user_main_card_lft h3 {
+    font-size: 18px;
+  }
+
+  .manage_user_main_card_rht,
+  .right_bottom_ttl_lft {
+    margin-top: 16px;
+  }
+
+  .manage_user_main_card_rht,
+  .manage_user_main_card_rht .organazation_table_search,
+  .manage_user_main_card_rht .organazation_table_search form,
+  .manage_user_main_card_rht .organazation_table_search form input {
+    width: 100%;
+  }
+
+  .add_user_success_card h4 {
+    font-size: 20px;
+  }
+
+  .add_user_success_card p {
+    font-size: 14px;
+  }
+
+  .manage_user_main_organizations {
+    padding-bottom: 35px;
+
+  }
+
+  #OrganisationsTable_wrapper .dataTables_filter {
+    left: -6px;
+    right: auto;
+    top: -90px;
+  }
+
+  #OrganisationsTable_wrapper .dataTables_filter input {
+    width: 100%;
+  }
+
+  #OrganisationsTable_wrapper .dataTables_filter::before {
+    top: 33px;
+    left: 20px;
+  }
+
+  .Send_Btn {
+    margin-left: 0 !important;
+  }
+
+  .api_key_div {
+    padding: 11px 10px !important;
+  }
+
+  .all_offer_tbl {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .all_offer_tbl.user_mian_rights .user_select_drpdwn {
+    width: 100%;
+  }
+
+  .all_offer_tbl.user_mian_rights  {
+    width: 100%;
+  }
+
+  .summer_offer_card {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .summer_offer_card .summer_offer_card_lft,
+  .summer_offer_card_rht {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .summer_offer_card_rht {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
+  .summer_offer_date {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .summer_offer_date .summer_offer_date_lft {
+    margin-bottom: 24px;
+    margin-right: 0;
+  }
+
+  .summer_offer_card_lft img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .offer_details_links {
+    font-size: 16px;
+  }
+
+  .offer_ttl_crd .offer_ttl_crd_lft h4,
+  .analytics_card .analytics_card_lft h2 {
+    font-size: 30px;
+  }
+
+  .offer_details_sub_card .offer_details_sub_card_txt h3 {
+    font-size: 18px;
+  }
+
+  .offer_details_main_card h2,
+  .summer_offer_ttl h3 {
+    font-size: 20px;
+  }
+
+  .invoice_total_billto {
+    justify-content: flex-start;
+  }
+
+  .invoice_details_top {
+    flex-direction: column;
+  }
+
+  .invoice_details_top_rht {
+    margin-top: 16px;
+  }
+
+  .analytics_dropdown .user_select_drpdwn {
+    margin: 0 0 16px 0;
+  }
+}
+
+@media(max-width:500px) {
+  .login_body .login_wrapper .login_box {
+    width: 100%;
+  }
+
+  .login_top_bx img {
+    width: 180px;
+  }
+
+  .add_verification-radio {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user_disabled_icon {
+    width: 170px;
+  }
+
+  .user_edit_icon {
+    width: 90px;
+  }
+
+  .user_delete_icon {
+    width: 104px;
+  }
+
+}
+
+@media(max-width:420px) {
+  .right_header_switch .switch {
+    width: 40px;
+    height: 20px;
+  }
+
+  .right_header_switch .switch::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .right_header_switch input:checked+.switch::before {
+    left: 20px;
+  }
+
+  .right_header_switch label {
+    font-size: 13px;
+  }
+
+  .right_header_profile {
+    width: 40px;
+  }
+
+  .right_header_wallet,
+  .right_header_topup {
+    margin-right: 0;
+  }
+
+  .Organaization_delete_Modal_Btm .Cancle_outline_btn,
+  .Organaization_delete_Modal_Btm .Confirm_Delete_Btn,
+  .admin_add_user_btns .Create_Btn,
+  .admin_add_user_btns .Cancle_outline_btn {
+    width: 100%;
+  }
+
+  .organaization_button {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .organaization_button .Create_Btn,
+  .organaization_button .Cancle_outline_btn {
+    width: 100%;
+  }
+
+  .admin_add_user_btns .Create_Btn {
+    margin-right: 0 !important;
+  }
+
+  .Send_Btn {
+    width: 100%;
+    margin-left: 0px !important;
+  }
+
+  .user_disabled_icon,
+  .user_edit_icon,
+  .user_delete_icon,
+  .Users_Main_list,
+  .user_right_bottom_ttl .right_bottom_ttl_lft,
+  .user_mian_rights .user_select_drpdwn,
+  .user_mian_rights .user_select_drpdwn select {
+    width: 100%;
+  }
+
+  .user_mian_rights .user_select_drpdwn select {
+    margin-bottom: 16px;
+  }
+
+  .user_mian_rights,
+  .right_bottom_ttl.offer_detail_ttl,
+  .Organaization_delete_Modal_Btm {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right_bottom_ttl.offer_detail_ttl .right_bottom_ttl_rht {
+    margin-top: 20px;
+  }
+
+  .add_user_btn {
+    width: 100%;
+  }
+
+  .api_delete_btn {
+    margin-left: 0 !important;
+  }
+}
+
+
+@media(max-width:1205px) and (min-width:1100px) {
+  .user_disabled_icon {
+    width: 160px;
+    font-size: 15px;
+  }
+
+  .user_edit_icon {
+    width: 100px;
+    font-size: 15px;
+  }
+
+  .user_delete_icon {
+    width: 110px;
+    font-size: 15px;
+  }
+}
+
+@media(max-width:1099px) and (min-width:1025px) {
+  .user_disabled_icon {
+    width: 153px;
+    font-size: 15px;
+  }
+
+  .user_edit_icon {
+    width: 90px;
+    font-size: 15px;
+  }
+
+  .user_delete_icon {
+    width: 95px;
+    font-size: 15px;
+  }
+}
+
+@media(max-width:1199px) and (min-width:1025px) {
+
+  .right_header_wallet .right_header_wallet_lft p,
+  .right_header_wallet .right_header_wallet_rht p,
+  .right_header_profile p,
+  .right_header_switch label {
+    font-size: 14px;
+  }
+
+  .right_header_switch label {
+    padding-right: 8px;
+  }
+
+  .right_header_wallet,
+  .right_header_topup {
+    margin-right: 8px;
+  }
+}
