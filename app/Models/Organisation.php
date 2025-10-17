@@ -9,7 +9,10 @@ class Organisation extends Model
 {
     protected $table = 'organisations';
     public $timestamps = false;
-
+    public function currencyName()
+    {
+        return $this->hasOne(Currencies::class,'id','currency_id'); // adjust to match your column name
+    }
     public function userCount()
     {
         return $this->hasMany(User::class);

@@ -111,14 +111,14 @@
         <div class="form-row add_user_form_row">
             <div class="form-group col-md-12">
                 <label>Company address*</label>
-                 <input type="text" id="autocomplete" placeholder="Enter address" class="w-100">
+                 <input type="text" id="autocomplete" placeholder="Enter address" class="w-100" value="{{ $data->company_address_line1 }} {{ $data->company_address_city }} {{ $data->company_address_country }}">
                     <div class="autocomplete-dropdown" id="dropdown"></div>
             </div>
           		 @error('company_address_google_placeid')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
         </div>
-         <input type="hidden" name="company_address_line1" id="line1" placeholder="Address Line 1"   value="{{ $data->company_address_line1 }}">
+        <input type="hidden" name="company_address_line1" id="line1" placeholder="Address Line 1"   value="{{ $data->company_address_line1 }}">
         <input type="hidden" name="company_address_line2" id="line2" placeholder="Address Line 2 (optional)"  value="{{ $data->company_address_line2 }}">
         <input type="hidden" name="company_address_city" id="city" placeholder="City" value="{{ $data->company_address_city }}">
         <input type="hidden" name="company_address_state" id="state" placeholder="State" value="{{ $data->company_address_state }}">
@@ -153,28 +153,19 @@
                 @enderror
             </div>
         </div>
-        <!--<div class="form-row add_user_form_row">
+       <div class="form-row add_user_form_row">
             <div class="form-group col-md-12">
                 <label>Currency*</label>
                 <select name="currency_id" class="form-select" aria-label="Default select example">
                    <option value="">Select Currency</option>
-                      @foreach ($currencies as $key => $value)
-                              <option value="{{ $value->id }}" {{ $data->currency_id == $value->id ? 'selected' : '' }}>
-                              {{ $value->currency }} ({{ $value->symbol }})</option>
-                      @endforeach
+                      @if($data->currencyName)
+                        <option value="{{ $data->currencyName->id }}" selected>
+                            {{ $data->currencyName->currency }} ({{ $data->currencyName->symbol }})
+                        </option>
+                    @else
+                        <option value="">Select Currency</option>
+                    @endif
                 </select>
-                @error('currency_id')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div> -->
-   		<div class="form-row add_user_form_row">
-            <div class="form-group col-md-12">
-                <label>Currency*</label>
-                <select name="currency_id" id="currency" class="form-select" aria-label="Default select example">
-                    <option value="">Select Currency</option>
-                </select>
-
                 @error('currency_id')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

@@ -153,7 +153,7 @@ class OrganisationsController extends Controller
         $usastates = UsaStates::get();
         $countries = Countries::get();
         $currencies = Currencies::get();
-        $data = Organisation::with('organisationtaxregistrationsm')->findOrFail($id);
+        $data = Organisation::with(['organisationtaxregistrationsm','currencyName'])->findOrFail($id);
         $data->category_id = is_array($data->category_id) ? $data->category_id : json_decode($data->category_id, true);
        //echo "<pre>"; print_r($data);die;
         return view('organisation.edit', compact('data','category','usastates','countries','currencies'));
@@ -162,7 +162,6 @@ class OrganisationsController extends Controller
     {
             $request->validate([
             'company_name'     => 'required|string|max:255',
-            'company_address'  => 'required',
             'country_id'       => 'required',
            // 'usa_state_id'     => 'required',
             'currency_id'      => 'required',

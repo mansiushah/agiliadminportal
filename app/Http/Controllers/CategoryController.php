@@ -10,13 +10,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-     $data = Category::withoutGlobalScopes()->orderBy('id', 'desc')->get();//Category::orderBy('id','desc')->get();
-     // Attach organisation count per category
-     foreach ($data as $category)
-     {
-       $category->organisation_count = Organisation::whereJsonContains('category_id', $category->id)->count();
-     }
-     return view('category.index', compact('data'));
+        $data = Category::withoutGlobalScopes()->orderBy('id', 'desc')->get();//Category::orderBy('id','desc')->get();
+         // Attach organisation count per category
+        foreach ($data as $category)
+        {
+           $category->organisation_count = Organisation::whereJsonContains('category_id', $category->id)->count();
+        }
+        return view('category.index', compact('data'));
     }
     public function create()
     {
@@ -24,19 +24,19 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
-    $request->validate([
-            'category_name'    =>  'required',
-        ]);
-        $form_data = array(
-            'name'       =>   $request->category_name,
-        );
-    Category::create($form_data);
-    return redirect()->route('categories')->with('success',__('messages.cat_add'));
+        $request->validate([
+                'category_name'    =>  'required',
+            ]);
+            $form_data = array(
+                'name'       =>   $request->category_name,
+            );
+        Category::create($form_data);
+        return redirect()->route('categories')->with('success',__('messages.cat_add'));
 	}
     public function edit($id)
     {
-    $data = Category::findOrFail($id);
-    return view('category.edit', compact('data'));
+        $data = Category::findOrFail($id);
+        return view('category.edit', compact('data'));
     }
     public function update(Request $request)
     {

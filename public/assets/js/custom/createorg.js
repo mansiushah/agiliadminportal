@@ -102,7 +102,8 @@ $(document).ready(function () {
         $('#currency').html('<option value="">Select Currency</option>');
         if (country_code) {
             $.ajax({
-                url: '/php/M-0402/Ad-Agilis/Ad-agilis-admin/get-currencies/' + country_code,
+                //url: '/php/M-0402/Ad-Agilis/Ad-agilis-admin/get-currencies/' + country_code,
+                url: '/get-currencies/' + country_code,
                 type: 'GET',
                 success: function (data) {
                     if (data.length > 0) {
