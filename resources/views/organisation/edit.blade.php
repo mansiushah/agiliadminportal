@@ -2,11 +2,11 @@
 @section('title', 'Edit organisation')
 @section('content')
 <style>
-    #vatFieldsContainer {
-    display: block; /* or flex/grid if needed */
-    height: auto !important;
-    overflow: visible;
-}
+        #vatFieldsContainer {
+        display: block; /* or flex/grid if needed */
+        height: auto !important;
+        overflow: visible;
+    }
         /* Autocomplete CSS Start */
         #autocomplete {
             width: 100%;

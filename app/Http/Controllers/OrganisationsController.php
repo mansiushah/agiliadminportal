@@ -93,6 +93,7 @@ class OrganisationsController extends Controller
         $organisation->category_id = json_encode(array_map('intval', $request->category_id));
         $organisation->offer_quota_set = $request->offer_quota;
         $organisation->offer_quota = $request->max_number_of_offer;
+        $organisation->status = 'A';
         $organisation->save();
         if($organisation)
         {
@@ -376,7 +377,7 @@ class OrganisationsController extends Controller
         $encryptedId = $urlSafe;
         $link = config('services.ad_portal_url').'/first-login/' . $encryptedId;
         $name = $request->full_name;
-        Mail::to($user->email)->send(new \App\Mail\FirstLoginMail($user->name, $link));
+        Mail::to($user->email)->send(new \App\Mail\FirstLoginMail($name, $link));
         //return view('emails.sentnewpassword', compact('name', 'link'));die;
         //return back()->with('success', 'User created and email sent.');
         return redirect()->route('organisations.view',$request->organisation_id)->with('success', __('messages.org_user_add'));
@@ -408,6 +409,7 @@ class OrganisationsController extends Controller
     public function destroyUser($id)
     {
         $users = User::findOrFail($id);
+        $orgid = $users->
         $OffersId = $users->offers ? $users->offers->pluck('id')->toArray() : [];
         Payments::where('user_id', $id)->delete();
         WalletHistory::where('user_id',$id)->delete();
@@ -421,7 +423,8 @@ class OrganisationsController extends Controller
         //Offers::whereIn('user_id', $id)->delete();
         // Finally delete the organisation
         $users->delete();
-        return redirect()->route('organisations.view',$id)->with('success',  __('messages.disable_all_user'));
+        redirect()->back()->with('success', __('messages.disable_all_user'));
+       // return redirect()->route('organisations.view',$id)->with('success',  __('messages.disable_all_user'));
     }
     public function resetUserPassword($id)
     {
@@ -445,6 +448,7 @@ class OrganisationsController extends Controller
     }
     public function orgRequest(Request $request)
     {
-        return view('organisation.orgrequest');
+        $data = Organisation::with('organisationtaxregistrationsm')->whereNull('stripe_test_customer_id')->whereNull('stripe_customer_id')->orderBy('id','desc')->get();
+        return view('organisation.orgrequest',compact('data'));
     }
 }

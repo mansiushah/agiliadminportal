@@ -11,12 +11,6 @@
         <h4>Org. Requests</h4>
         <p>Review and manage organisation registration requests</p>
     </div>
-    <!-- <div class="right_bottom_ttl_lft">
-        <a href="#" class="add_Organisations_btn">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            <span>Add New Organisations</span>
-        </a>
-    </div> -->
 </div>
 <div class="manage_user_main_card">
     <div class="manage_user_main manage_user_main_organizations">
@@ -38,14 +32,25 @@
             </tr>
         </thead>
         <tbody>
+             @php $i = 1; @endphp
+             @foreach($data as $row)
             <tr>
-                <td>01</td>
-                <td>ABC Ltd.</td>
-                <td>ABC Ltd.</td>
-                <td>12345678</td>
+                <td>{{ $i++ }}</td>
+                <td>{{ $row->company_name }}</td>
+                <td>{{ $row->trading_name }}</td>
+                <td>{{ $row->company_number }}</td>
                 <td>GB123456</td>
-                <td>12 King Street, London</td>
+                <td>{{ $row->company_address_line1 }} {{ $row->company_address_line2 }} {{ $row->company_address_state }} {{ $row->company_address_city }}</td>
+                @if($row->status == 'R')
+                <td><span class="reject_span">Rejected</span></td>
+                @elseif($row->status == 'A')
+                <td><span class="approve_span">Approved</span></td>
+                @elseif($row->status == 'P')
                 <td><span class="pending_span">Pending</span></td>
+                @else
+                <td>--</td>
+                @endif
+                @if($row->status == 'P')
                 <td>
                     <div class="d-flex">
                     <a href="#" class="approve_btn">Approve</a>
@@ -53,102 +58,11 @@
                     <a href="#" class="approve_btn reject_btns">Reject</a>
                     </div>
                 </td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>Nova Tech Ltd</td>
-                <td>BrightWave</td>
-                <td>84726351</td>
-                <td>-</td>
-                <td>50 Main Ave, Manchester</td>
-                <td><span class="pending_span">Pending</span></td>
-                <td>
-                    <div class="d-flex">
-                    <a href="#" class="approve_btn">Approve</a>
-                    <a href="#" class="approve_btn edit_btns">Edit</a>
-                    <a href="#" class="approve_btn reject_btns">Reject</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>03</td>
-                <td>BrightWave Group</td>
-                <td>Reach Media </td>
-                <td>72836482</td>
-                <td>GB645372</td>
-                <td>22 Hope Rd, Birmingham</td>
-                <td><span class="approve_span">Approve</span></td>
+                @else
                 <td></td>
+                @endif
             </tr>
-            <tr>
-                <td>02</td>
-                <td>Nova Tech Ltd</td>
-                <td>BrightWave</td>
-                <td>84726351</td>
-                <td>-</td>
-                <td>50 Main Ave, Manchester</td>
-                <td><span class="pending_span">Pending</span></td>
-                 <td>
-                    <div class="d-flex">
-                    <a href="#" class="approve_btn">Approve</a>
-                    <a href="#" class="approve_btn edit_btns">Edit</a>
-                    <a href="#" class="approve_btn reject_btns">Reject</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>03</td>
-                <td>BrightWave Group</td>
-                <td>Reach Media </td>
-                <td>72836482</td>
-                <td>GB645372</td>
-                <td>22 Hope Rd, Birmingham</td>
-                <td><span class="approve_span">Approve</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>03</td>
-                <td>BrightWave Group</td>
-                <td>Reach Media </td>
-                <td>72836482</td>
-                <td>GB645372</td>
-                <td>22 Hope Rd, Birmingham</td>
-                <td><span class="approve_span">Approve</span></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>Nova Tech Ltd</td>
-                <td>BrightWave</td>
-                <td>84726351</td>
-                <td>-</td>
-                <td>50 Main Ave, Manchester</td>
-                <td><span class="pending_span">Pending</span></td>
-                 <td>
-                    <div class="d-flex">
-                    <a href="#" class="approve_btn">Approve</a>
-                    <a href="#" class="approve_btn edit_btns">Edit</a>
-                    <a href="#" class="approve_btn reject_btns">Reject</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>Nova Tech Ltd</td>
-                <td>BrightWave</td>
-                <td>84726351</td>
-                <td>-</td>
-                <td>50 Main Ave, Manchester</td>
-                <td><span class="pending_span">Pending</span></td>
-                 <td>
-                    <div class="d-flex">
-                    <a href="#" class="approve_btn">Approve</a>
-                    <a href="#" class="approve_btn edit_btns">Edit</a>
-                    <a href="#" class="approve_btn reject_btns">Reject</a>
-                    </div>
-                </td>
-            </tr>
-            <!-- ************************ -->
+            @endforeach
         </tbody>
     </table>
 </div>
