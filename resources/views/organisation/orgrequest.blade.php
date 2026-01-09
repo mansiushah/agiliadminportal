@@ -18,6 +18,7 @@
             <h3>Requests</h3>
         </div>
     </div>
+      @include('flash-message')
     <table id="OrganisationsTable" class="display table-responsive-xl" style="width:100%">
         <thead>
             <tr>
@@ -53,9 +54,9 @@
                 @if($row->status == 'P')
                 <td>
                     <div class="d-flex">
-                    <a href="#" class="approve_btn">Approve</a>
-                    <a href="#" class="approve_btn edit_btns">Edit</a>
-                    <a href="#" class="approve_btn reject_btns">Reject</a>
+                    <a href="{{ route('orgrequestappove',['id' => $row->id]) }}" class="approve_btn">Approve</a>
+                    <a href="{{route('request.edit', $row->id)}}" class="approve_btn edit_btns">Edit</a>
+                    <a href="{{ route('orgrequestreject',['id' => $row->id]) }}" class="approve_btn reject_btns">Reject</a>
                     </div>
                 </td>
                 @else

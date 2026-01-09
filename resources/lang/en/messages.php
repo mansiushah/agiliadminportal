@@ -10,5 +10,7 @@ return [
     'cat_delete'=>'Category deleted successfully',
     'code_reset'=>'Code re-sent now.',
     'otp_missmatch'=>'Sorry, that verification code is incorrect',
+    'approveorgnisationtion'=>'Organisation Approved',
+    'rejetorgnisationtion'=>'Organisation Reject',
 ];
 

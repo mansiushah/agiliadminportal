@@ -1618,6 +1618,15 @@ table.dataTable.nowrap td {
   font-size: 14px;
   font-weight: 600;
 }
+.reject_span{
+    background: #FFEDED;
+    border: 1px solid #FFBFC0;
+    padding: 7px 14px;
+    border-radius: 50px;
+    color: #E61718;
+    font-size: 14px;
+    font-weight: 600;
+  }
 /* ORG. Requests Page CSS End */
 /* Manage Invoice Page CSS Start */
 .right_bottom_ttl_lft .user_select_drpdwn select {

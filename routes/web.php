@@ -46,6 +46,11 @@ Route::middleware('auth:admin')->group(function () {
    Route::post('/organisations/userreset/{id}', [OrganisationsController::class, 'resetUserPassword'])->name('organisations.reset.user.password');
    Route::get('/get-tax-registrations/{country_code}', [OrganisationsController::class, 'getTaxRegistrations'])->name('txtcheck');
    Route::get('/org-request', [OrganisationsController::class, 'orgRequest'])->name('orgrequest');
+   Route::get('/org-request-approve/{id}', [OrganisationsController::class, 'orgRequestApprove'])->name('orgrequestappove');
+   Route::get('/org-request-reject/{id}', [OrganisationsController::class, 'orgRequestReject'])->name('orgrequestreject');
+   Route::get('organisations-request-edit/{id}', [OrganisationsController::class, 'editRequest'])->name('request.edit');
+   Route::post('organisations-request-update', [OrganisationsController::class, 'updaterequest'])->name('request.update');
+
    Route::post('/organisations/{id}/filter-users', [OrganisationsController::class, 'filterUsers'])
     ->name('organisations.filterUsers');
    //User Route
@@ -69,8 +74,10 @@ Route::middleware('auth:admin')->group(function () {
    //invoice
    Route::get('invoice', [InvoiceController::class, 'index'])->name('invoice');
    Route::get('invoice-view', [InvoiceController::class, 'view'])->name('invoice.view');
-     //Analytics
+         //Analytics
    Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics');
+    Route::get('/analytics/export-csv', [AnalyticsController::class, 'exportCSV'])->name('analytics.exportCSV');
+    Route::get('/analytics/export-pdf', [AnalyticsController::class, 'exportPDF'])->name('analytics.exportPDF');
    //offer
    Route::get('offer', [OfferController::class, 'index'])->name('offer');
    Route::get('offer-view', [OfferController::class, 'view'])->name('offer.view');

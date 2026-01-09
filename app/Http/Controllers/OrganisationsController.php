@@ -451,4 +451,128 @@ class OrganisationsController extends Controller
         $data = Organisation::with('organisationtaxregistrationsm')->whereNull('stripe_test_customer_id')->whereNull('stripe_customer_id')->orderBy('id','desc')->get();
         return view('organisation.orgrequest',compact('data'));
     }
+    public function orgRequestApprove($id)
+    {
+        Organisation::where('id', $id)->update(['status' => 'A']);
+        return redirect()->route('orgrequest')->with('success',  __('messages.approveorgnisationtion'));
+    }
+    public function orgRequestReject($id)
+    {
+        Organisation::where('id', $id)->update(['status' => 'R']);
+        return redirect()->route('orgrequest')->with('success',  __('messages.rejetorgnisationtion'));
+    }
+      public function editRequest($id)
+    {
+        $category = Category::get();
+        $usastates = UsaStates::get();
+        $countries = Countries::get();
+        $currencies = Currencies::get();
+        $data = Organisation::with(['organisationtaxregistrationsm','currencyName'])->findOrFail($id);
+        $data->category_id = is_array($data->category_id) ? $data->category_id : json_decode($data->category_id, true);
+       //echo "<pre>"; print_r($data);die;
+        return view('organisation.requestedit', compact('data','category','usastates','countries','currencies'));
+    }
+    public function updaterequest(Request $request)
+    {
+            $request->validate([
+            'company_name'     => 'required|string|max:255',
+            'category_id'      => 'required|array|min:1',
+            'category_id.*'    => 'exists:categories,id',
+        ]);
+        $organisation = Organisation::with('organisationtaxregistrationsm')->where('id',$request->id)->first();
+        $organisation->company_name = $request->company_name;
+        $organisation->trading_name = $request->trading_name;
+        $organisation->company_number = $request->company_number;
+        $organisation->category_id = json_encode(array_map('intval', $request->category_id));
+        $organisation->save();
+        if($organisation)
+        {
+
+           Stripe::setApiKey(config('services.stripe.secret'));
+            // Create the customer on Stripe
+            $customer = Customer::create([
+                'name' => $request->company_name,
+               // 'email' => $request->company_email,
+                'address' => [
+                    'line1' => $organisation->company_address_line1,
+                    'city' => $organisation->company_address_city,
+                    'state' => $organisation->company_address_state,
+                    'postal_code' => $organisation->company_address_postal_code,
+                    'country' => $organisation->company_address_country,
+                ],
+                'metadata' => [
+                    'company_type' => 'advertiser',
+                    'business_name' => $request->company_name
+                ],
+            ]);
+            $customerId = $customer->id;
+            $organisationnew = Organisation::where('id',$organisation->id)->first();
+            $organisationnew->stripe_test_customer_id = $customerId;
+            $organisationnew->save();
+            $taxNumbers = $request->tax_registration_number ?? [];
+            $taxTypes   = $request->stripe_tax_type ?? [];
+            // Check if country changed
+            $oldCountryId = $organisation->getOriginal('country_id');
+            $newCountryId = $organisation->country_id;
+            if ($oldCountryId != $newCountryId) {
+                // Country changed → delete all old tax records
+                OrganisationTaxRegistrations::where('organisation_id', $organisation->id)->delete();
+            }
+             foreach ($taxNumbers as $index => $number) {
+                $number = strtoupper(trim($number));
+                if (!empty($number)) {
+                    Stripe::setApiKey(config('services.stripe.secret'));
+                    $customerId = $organisation->stripe_customer_id ?? $organisation->stripe_test_customer_id;
+                    $taxType    = $taxTypes[$index] ?? 'eu_vat';
+                    // ✅ 1. Get existing tax IDs from Stripe
+                    $existingTaxIds = \Stripe\Customer::allTaxIds($customerId, ['limit' => 100]);
+                    $alreadyExists = false;
+                    foreach ($existingTaxIds->data as $existingTax) {
+                        if (
+                            strtoupper($existingTax->value) === $number &&
+                            $existingTax->type === $taxType
+                        ) {
+                            $alreadyExists = $existingTax->id;
+                            break;
+                        }
+                    }
+                    if ($alreadyExists) {
+                        // ✅ Already exists → just update DB mapping
+                        $column = env('STRIPE_MODE') === 'live' ? 'stripe_tax_id' : 'stripe_test_tax_id';
+                        OrganisationTaxRegistrations::updateOrCreate(
+                            [
+                                'organisation_id' => $organisation->id,
+                                'stripe_tax_type' => $taxType
+                            ],
+                            [
+                                'tax_registration_number' => $number,
+                                $column                   => $alreadyExists,
+                            ]
+                        );
+                    } else {
+                        // ✅ Create new tax ID in Stripe
+                        $stripeTaxId = \Stripe\Customer::createTaxId(
+                            $customerId,
+                            [
+                                'type'  => $taxType,
+                                'value' => $number,
+                            ]
+                        );
+                        $column = env('STRIPE_MODE') === 'live' ? 'stripe_tax_id' : 'stripe_test_tax_id';
+                        OrganisationTaxRegistrations::updateOrCreate(
+                            [
+                                'organisation_id' => $organisation->id,
+                                'stripe_tax_type' => $taxType
+                            ],
+                            [
+                                'tax_registration_number' => $number,
+                                $column                   => $stripeTaxId->id,
+                            ]
+                        );
+                    }
+                }
+            }
+        }
+        return redirect()->route('orgrequest')->with('success', __('messages.org_update'));
+    }
 }
